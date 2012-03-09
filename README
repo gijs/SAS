@@ -1,0 +1,8 @@
+Complete SAS
+
+A Complete multi tenant supported SAAS web-application framework, which will have the following main modules.
+1. Authentication, Autorization Framework.
+2. Multi Tenanant Support.
+3. Custom UI option.
+
+License : MIT (http://www.opensource.org/licenses/mit-license.php) license.
