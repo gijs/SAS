@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SAS Solution</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/bootstrap-responsive.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-touch-icon-114x114.png">    
+    <style type="text/css">
+      .span3{
+        width:230px;
+      }
+      .span10{
+        width: 970px;
+        margin-left: 10px;
+      }
+      body {
+        padding-top: 55px;
+        padding-bottom: 40px;
+		    background-color:#F5F6F7;
+		    background:url("img/noise.gif") repeat fixed 0 0 #F5F5F5;
+      }
+      .container{
+	       /*background:url("img/wash-white-30.png") repeat scroll 0 0 transparent;*/
+      }
+      .pageContent{        	
+	        background-color:#FFFFFF;
+	        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	        border-color:#C9C9C9;
+	        border-radius:5px;
+	        min-height: 600px;
+	        /*padding: 20px 15px;  
+          background-image:-moz-linear-gradient(center top , #FCFCFC 0%, #FCFCFC 50%, #E8E8E8 100%);*/
+      }      
+      .footer{
+	       text-align:center;
+	       padding: 20px;
+      }
+      legend{
+ 	      color : #FF0000 !important;
+      }
+      .form-actions-custom {
+	       margin-bottom: 20px;
+	       margin-top: 20px;
+	       text-align:center;
+      }
+      .container{
+     	   width:1250px !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/"><!--<img src="/img/logo.png" width="30px" height="30px"/>-->SAS</a>
+          <div class="nav-collapse">
+            <ul class="nav" id="tabs">
+
+              <li class="active" id="dashboard"><a href="javascript:loadModule('/dashboard','dashboard')"><i class="icon-home icon-white"></i></a></li>
+	            <li id="admin"><a href="javascript:loadModule('/admin','admin')">Admin</a></li>
+            </ul>
+	          <ul class="nav pull-right">
+                  <li class="dropdown" id="fat-menu">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-user icon-white"></i><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="javascript:logout()">sign out</a></li>                      
+                      <li class="divider"></li>
+                      <li><a href="javascript:showChangePassword()">Change Password</a></li>
+                    </ul>
+                  </li>
+            </ul>
+          </div><!--/.nav-collapse -->	  
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+        <div class="alert" id="msg_success_holding_div">
+          <a class="close" data-dismiss="alert">×</a>
+          <span id="msg_div" text-align="center"></span>
+        </div>
+	      <div class="pageContent">
+            <div id="loading" align="center"><img src="/img/loading.gif"/></div>
+            <div id="contentDiv" style="display:none;">
+            <!-- Module call response html will be dumped here.....-->
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <!-- Change Password popup-->
+    <div class="modal" id="changePassword" style="display:none">      
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <div id="result" style="text-align:center;padding-top:10px;"></div>
+        <h3>Change Password</h3>
+      </div>
+      <div class="modal-body">
+        <div>
+        <span>Old Password</span>
+        <span><input type="password" name="password_old" value="" id="password_old"/></span>
+        </div>
+        <div>
+        <span>New Password</span>
+        <span ><input type="password" name="password_new" value="" id="password_new"/></span>
+        </div>
+        <div>
+        <span>Confirm Password</span>
+        <span><input type="password" name="password_confirm" value="" id="password_confirm"/></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:changePassword()" class="btn btn-primary">Save</a>
+        <a href="javascript:closeChangePasswordWindow()" class="btn">Close</a>
+      </div>
+    </div>
+    <!-- end -->
+
+    <footer>
+    	<p class="footer">&copy; Company 2012, all rights reserved.</p>
+    </footer>
+
+    <script src="/js/lib/jquery.js"></script>
+    <script src="/js/lib/bootstrap.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script>
+		$('input').tooltip({animation:true, placement:'top', selector:false, trigger:'hover', delay: { show: 0, hide: 0 }});   
+    $('.alert').alert('close');
+    $.get('/dashboard', function(result){
+        $("#contentDiv").html(result);
+    });    
+    </script>
+  </body>
+</html>

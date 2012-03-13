@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>SRM Solution</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script language="javascript" src='/js/lib/jquery.js' type="text/javascript"></script>
+    <script>
+    	function postData(url, data, callBack){      
+	    	$.post(url, data,function(response, status){
+        	callBack(response, status);
+    		});   
+		}
+
+    	function submit(){
+    		var data={};
+    		data['user_id']= $('#user_id').val();
+    		data['password']= $('#password').val();
+        data['action']= 'login';
+
+    		$.post('/auth/invoke?', data, function(response, status){
+    			console.log(response)
+    			if(response.success === true){
+    				window.location= response.url;
+    			}else if(response.type ==='error' || response.type ==='failure'){
+    				$('#status').html("<span style='color:#FF0000'>"+response.message+"<span>");
+    			}
+
+    		});
+    	}
+    </script> 
+    <style>
+      .pageContent {
+        background-color: #FFFFFF;
+        background-image: -moz-linear-gradient(center top , #FCFCFC 0%, #FCFCFC 50%, #E8E8E8 100%);
+        border-color: #C9C9C9;
+        border-radius: 5px 5px 5px 5px;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        min-height: 600px;
+        padding: 20px 15px;
+        font-size: 13px;
+    }
+    </style> 
+  </head>
+  <body>
+  		<table class="pageContent" style="margin-top:300px;margin-left:550px" font-size="smaller">
+  		<tbody>
+  		<tr><td>
+  		<table >  		
+  		<tbody>
+  			<tr>
+  				<td>
+  					<div id="status"></div>
+  				</td>
+  			<tr>
+  		</tbody>
+  		</table>
+  		</td></tr>
+  		<tr><td>
+    	<table>
+    		<tbody>
+    			<tr>	
+    				<td>User Name </td>
+    				<td><input type="text" name="user_id" value="" id="user_id"/></td>
+    			</tr>
+    			<tr>
+    				<td>Password </td>
+    				<td><input type="password" name="password" value="" id="password"/></td>    			
+    			</tr>
+    			<tr>
+    				<td><a href="/signup">New User</a></td>
+    				<td><input type="button" name="password" value="Login" id="password" onclick="submit()"/></td>    			
+    			</tr>    			
+    		</tbody>
+    	</table>
+    	</td></tr>
+    	</tbody>
+    	</table>
+       
+  </body>
+</html>

@@ -1,0 +1,17 @@
+switched to db SRM
+> db.Users.find()
+{ "_id" : ObjectId("4f5abf3813940fca56d4aecb"), "user_id" : "admin", "password" : "a6b3fac1d0f0c28a976c87dd6a791334e9210a7fd284cec6e972376712f30e89", "tenant_id" : ObjectId("4f5abefe13940fca56d4aeca"), "role_id" : ObjectId("4f5c3a4e7a22d74d50964691") }
+{ "_id" : ObjectId("4f5abfb813940fca56d4aecc"), "user_id" : "test", "password" : "e17afc8eed7934f16e07946c3bc650dec40a22229cecc6dbbc44f73361c2ce95", "tenant_id" : ObjectId("4f5abefe13940fca56d4aeca"), "role_id" : ObjectId("4f5c3a4e7a22d74d50964691") }
+
+
+> db.Tenants.find()
+{ "_id" : ObjectId("4f5abefe13940fca56d4aeca"), "name" : "TCS", "address" : "ITPL, Bangalore", "user_count" : 2 }
+{ "_id" : ObjectId("4f5abfe913940fca56d4aecd"), "name" : "ZOHO Corp", "address" : "Chennai", "user_count" : 10 }
+
+> db.Roles.find()
+{ "_id" : ObjectId("4f5c3a4e7a22d74d50964691"), "name" : "admin", "description" : "has all the permissions" }
+
+
+> db.Permissions.find()
+{ "_id" : ObjectId("4f5c3cce7a22d74d50964692"), "role_id" : ObjectId("4f5c3a4e7a22d74d50964691"), "changepassword" : true, "tab_dashboard" : true, "tab_admin" : true, "tab_reports" : true, "tab_leads" : true, "lead_add" : true, "lead_delete" : true, "lead_update" : true, "task_add" : true, "task_update" : true, "task_delete" : true, "send_quote" : true }
+

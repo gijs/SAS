@@ -1,0 +1,41 @@
+<div class="row" style="padding: 30px 30px;">
+    <div class="span9">
+      <legend>Summary </legend> 
+      <span id="user_id_label"></span>
+      <span id="user_id_value"></span>
+      <div class="well">
+          <span>
+            <div id="overdue_tasks_label"></div>
+            <div id="overdue_tasks_value"></div>
+          </span>
+          <span>
+            <div id="today_tasks_label"></div>
+            <div id="today_tasks_value"></div>
+          </span>
+          <span>
+            <div id="open_eads_label"></div>
+            <div id="open_eads_value"></div>
+          </span>
+          <span>
+            <div id="today_conversions_label"></div>
+            <div id="today_conversions_value"></div>          
+          </span>                              
+      </div>
+    </div>
+    <div class="span3">
+      <h3>Basic form</h3>
+      <p>With v2.0, we have lighter and smarter defaults for form styles. No extra markup, just form controls.</p>
+    </div>
+  </div>
+<script>
+        $.get('dashboard/list', function(result){
+            console.log(result);            
+            Object.keys(result).forEach(function(key) {
+                console.log(key);
+                $('#'+key+'_label').html(result[key].label);
+                $('#'+key+'_value').html(result[key].value);
+            });
+            $("#loading").hide(); 
+            $("#contentDiv").toggle(true);                    
+        });
+</script>
