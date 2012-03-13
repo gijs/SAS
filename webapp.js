@@ -89,6 +89,10 @@ function bootController(app, file) {
 
   Object.keys(actions).map(function(action){
     var fn = controllerAction(name, action, actions[action]);
+    if(prefix==="/tenant" && action==="index"){
+      app.get(prefix, fn);
+      return;
+    }
     switch(action) {
       case 'index':
         app.get(prefix, loadUser, fn);

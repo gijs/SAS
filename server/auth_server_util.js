@@ -81,6 +81,44 @@ function hash(msg, key) {
  			}
  		} 		
  	});
+ },
+
+ createTenant: function(req, res, callback){
+ 	var tenant = req.body;
+ 	errObj =null;
+ 	isSuccess=false;
+ 	dbutil.addTenant(tenant, function(err, result){ 		
+ 		if(err){
+ 			console.log("Error occurred while updating the data:",err); 			
+ 			errObj ={'type':'error', 'message':'Unable to create the account, please contact Administrator.'};
+ 			callback(errObj, isSuccess);
+ 		}
+ 		if(result[0]){
+ 			var tenant = result[0];
+ 			dbutil.getRole('admin', function(err, roles, total){
+ 				if(err){
+ 					console.log("Error occurred while updating the data:",err);
+ 					errObj ={'type':'error', 'message':'Unable to create the account, please contact Administrator.'};
+	 				callback(errObj, isSuccess);
+ 				}
+ 				if(roles[0]){
+ 					var role = roles[0];
+ 					var user={'user_id':tenant.email, 'password':hash(tenant.password, salt), 'tenant_id':tenant._id, 'role_id':role._id };
+ 					dbutil.addUser(user, function(err, result){
+ 						if(err){
+ 							console.log("Error occurred while updating the data:",err);
+ 							errObj ={'type':'error', 'message':'Unable to create the account, please contact Administrator.'};
+	 						callback(errObj, isSuccess);
+ 						}
+ 						if(result){
+ 							isSuccess=true;
+ 							callback(errObj, isSuccess);
+ 						}
+ 					});
+ 				} 				
+ 			});
+ 		}
+ 	});
  }
  
  };

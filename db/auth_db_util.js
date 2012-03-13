@@ -18,6 +18,10 @@ var BSON = mongo.BSONNative || mongo.BSONPure;
  		db.find(tableName, criteria, callback);
  	},
 
+ 	addUser: function(user, callback){
+ 		db.insert('Users', user, callback);
+ 	},
+
  	updateUser: function(user, tenant_id, callback){
  		var criteria = {};
  		criteria['_id'] = new BSON.ObjectID.createFromHexString(new String(user._id));
@@ -30,7 +34,16 @@ var BSON = mongo.BSONNative || mongo.BSONPure;
  		console.log('role_id', role_id);
  		criteria['role_id']=new BSON.ObjectID.createFromHexString(new String(role_id));
  		db.find('Permissions', criteria, callback);
- 	}
+ 	},
 
+ 	addTenant: function(obj, callback){
+ 		db.insert('Tenants', obj, callback);
+ 	},
+
+ 	getRole: function(role_name, callback){
+ 		var criteria = {};
+ 		criteria['name'] = role_name;
+ 		db.find('Roles', criteria, callback);
+ 	}
  
  }

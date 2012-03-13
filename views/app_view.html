@@ -110,18 +110,22 @@
         <h3>Change Password</h3>
       </div>
       <div class="modal-body">
-        <div>
-        <span>Old Password</span>
-        <span><input type="password" name="password_old" value="" id="password_old"/></span>
-        </div>
-        <div>
-        <span>New Password</span>
-        <span ><input type="password" name="password_new" value="" id="password_new"/></span>
-        </div>
-        <div>
-        <span>Confirm Password</span>
-        <span><input type="password" name="password_confirm" value="" id="password_confirm"/></span>
-        </div>
+        <table>
+        <tbody>
+        <tr>
+        <td>Old Password</td>
+        <td><input type="password" name="password_old" value="" id="password_old"/></td>
+        </tr>
+        <tr>
+        <td>New Password</td>
+        <td ><input type="password" name="password_new" value="" id="password_new"/></td>
+        </tr>
+        <tr>
+        <td>Confirm Password</td>
+        <td><input type="password" name="password_confirm" value="" id="password_confirm"/></td>
+        </tr>
+        <tbody>
+        </table>
       </div>
       <div class="modal-footer">
         <a href="javascript:changePassword()" class="btn btn-primary">Save</a>

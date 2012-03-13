@@ -14,18 +14,17 @@
 
     	function submit(){
     		var data={};
-    		data['user_id']= $('#user_id').val();
+    		data['name']= $('#org_name').val();
+    		data['url']= $('#url').val();
+    		data['email']= $('#email').val();
     		data['password']= $('#password').val();
-        data['action']= 'login';
+    		data['phone']= $('#phone').val();
 
-    		$.post('/auth/invoke?', data, function(response, status){
-    			console.log(response);
+    		$.post('/tenant/add', data, function(response, status){
+    			console.log(response)
     			if(response.success === true){
-    				window.location= response.url;
-    			}else if(response.type ==='error' || response.type ==='failure'){
-    				$('#status').html("<span style='color:#FF0000'>"+response.message+"<span>");
+    				$('#status').html("<span style='color:green'>"+response.message+"<span>");
     			}
-
     		});
     	}
     </script> 
@@ -59,17 +58,28 @@
   		<tr><td>
     	<table>
     		<tbody>
-    			<tr>	
-    				<td>User Name </td>
-    				<td><input type="text" name="user_id" value="" id="user_id"/></td>
+    			<tr>
+    				<td>Company Name</td>
+    				<td><input type="text" name="org_name" value="" id="org_name"/></td>    			
     			</tr>
     			<tr>
-    				<td>Password </td>
+    				<td>Custom URL</td>
+    				<td><input type="text" name="url" value="" id="url"/></td>    			
+    			</tr>
+    			<tr>
+    				<td>Email Address</td>
+    				<td><input type="text" name="email" value="" id="email"/></td>    			
+    			</tr>
+    			<tr>
+    				<td>Password</td>
     				<td><input type="password" name="password" value="" id="password"/></td>    			
     			</tr>
+ 				<tr>
+    				<td>Phone no</td>
+    				<td><input type="text" name="phone" value="" id="phone"/></td>    			
+	    		</tr>    			
     			<tr>
-    				<td><a href="/tenant">New User</a></td>
-    				<td><input type="button" name="password" value="Login" id="password" onclick="submit()"/></td>    			
+    				<td><input type="button" value="submit" onclick="submit()"/></td>    			
     			</tr>    			
     		</tbody>
     	</table>
