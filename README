@@ -6,3 +6,35 @@ A Complete multi tenant supported SAAS web-application framework, which will hav
 3. Custom UI option.
 
 License : MIT (http://www.opensource.org/licenses/mit-license.php) license.
+
+Architecture:-
+
+	
+	All the session information is stored in Redis cache, on each request from client we check the req.session.user is exist and check the neccessary permissions for particular operation.
+
+	req.session.user.tenant_id will be used to form all the DB quries to get the data specific to Tenant.
+
+
+TODO: 
+	1. MongoDB cluster implemantation.
+	2. Redis server cluster implementation.
+	3. Webserver Cluster implementation
+
+Usage :
+
+1. Run the following command from the home SAS folder, this will install all the dependencies.
+    
+    npm install -d
+
+2. If the Native parser error is coming go to the node_modules/mongodb and compile the source with the following command.
+
+	./make
+	
+3. Install MongoDB and start the Mongo DB in default port, if you want to change the port edit db/generic_dbutils.js and configure your port.
+
+4. Dump the tables and rows present in the quries.txt file.
+
+5. Install Redis ad start the redis server in default port if you want to change the port use the redis.conf.
+
+6. use the follwoing command to start the server.
+	node start.js
