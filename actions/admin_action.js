@@ -12,7 +12,7 @@
  	* As this HTML file is cached in the client side.
  	* rest of the other methods server only json req.
  	*/
- 	index: function(req,res){ 		
+ 	index: function(req,res){
  		res.render("admin_view.html");
  	},
 
@@ -67,6 +67,5 @@
  	delete: function(){
  		var jsonResponse = {};
  		res.send(jsonResponse);  		
- 	},
-
+ 	}
  };

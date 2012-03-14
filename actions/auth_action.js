@@ -55,15 +55,15 @@ module.exports = {
  	invoke: function(req, res){
  		var action = req.body.action;
  		switch(action) {
-      		case 'changePassword':
-        		changePassword(req, res);
-        		break;
         	case 'login':
         		login(req, res);
         		break
         	case 'logout':
         		logout(req, res);
         		break;
+      		case 'changePassword':
+        		changePassword(req, res);
+        		break;       	
     	}
  	}
  };

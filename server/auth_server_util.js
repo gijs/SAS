@@ -17,7 +17,7 @@ function hash(msg, key) {
 
  module.exports = {
 
- authenticateUser: function(req, res, user_id, password, callback){
+ authenticateUser: function(req, res, user_id, password, callback){ 	
  	dbutil.getUser(user_id, password, function(err, users, total){
  		var errObj = null;
  		var authenticated = false;
@@ -85,8 +85,8 @@ function hash(msg, key) {
 
  createTenant: function(req, res, callback){
  	var tenant = req.body;
- 	errObj =null;
- 	isSuccess=false;
+ 	var errObj =null;
+ 	var isSuccess=false;
  	dbutil.addTenant(tenant, function(err, result){ 		
  		if(err){
  			console.log("Error occurred while updating the data:",err); 			
@@ -119,6 +119,38 @@ function hash(msg, key) {
  			});
  		}
  	});
- }
+ },
+addUser: function(req, res, callback){
+	var role = req.body.role;
+	var errObj=null;
+	var isSuccess = false;
+ 	dbutil.getRole(role, function(err, roles, total){
+ 		if(err){
+ 			console.log("Error occurred while updating the data:",err);
+ 			errObj ={'type':'error', 'message':'Unable to create the user, please contact Administrator.'};
+	 		callback(errObj, isSuccess);
+ 		}
+ 		if(roles[0]){
+ 			var role = roles[0];
+ 			var user = req.body;
+ 			user.user_id = req.body.email;
+ 			user.password = hash(req.body.password, salt);
+ 			user.tenant_id = req.session.user.tenant_id;
+ 			user.role_id = role._id;
+ 			dbutil.addUser(user, function(err, result){
+ 				if(err){
+ 					console.log("Error occurred while updating the data:",err);
+ 					errObj ={'type':'error', 'message':'Unable to create the user, please contact Administrator.'};
+	 				callback(errObj, isSuccess);
+ 				}
+ 				if(result){
+ 					isSuccess=true;
+ 					callback(errObj, isSuccess);
+ 				}
+ 			});
+ 		}
+ 	});
+}
+ 					
  
  };

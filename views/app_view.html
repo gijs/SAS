@@ -90,8 +90,8 @@
     </div>
 
     <div class="container">
-        <div class="alert" id="msg_success_holding_div">
-          <a class="close" data-dismiss="alert">×</a>
+        <div class="alert" id="msg_success_holding_div" style="text-align:center;">
+          <a class="close" href="hideAlert();">×</a>
           <span id="msg_div" text-align="center"></span>
         </div>
 	      <div class="pageContent">
@@ -143,10 +143,13 @@
     <script src="/js/util.js"></script>
     <script>
 		$('input').tooltip({animation:true, placement:'top', selector:false, trigger:'hover', delay: { show: 0, hide: 0 }});   
-    $('.alert').alert('close');
+    $('.alert').hide();
     $.get('/dashboard', function(result){
         $("#contentDiv").html(result);
     });    
+    function hideAlert(){
+      $('.alert').hide();
+    }
     </script>
   </body>
 </html>
