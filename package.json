@@ -1,10 +1,11 @@
 {
     "name": "SAS"
-  , "version": "0.1"
+  , "version": "0.0.1"
   , "private": true
   , "dependencies": {
       "express": "2.5.8"
     , "ejs":"0.6.1"
-    , "mongodb":"0.9.7-1.4"
+    , "mongodb":"0.9.9-5"
+    , "connect-redis":"1.2.0"
   }
 }
